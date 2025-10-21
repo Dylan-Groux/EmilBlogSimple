@@ -3,7 +3,7 @@
 /**
  * Classe qui gère les articles.
  */
-class ArticleManager extends AbstractEntityManager 
+class ArticleManager extends AbstractEntityManager
 {
     /**
      * Récupère tous les articles.
@@ -43,7 +43,7 @@ class ArticleManager extends AbstractEntityManager
      * @param Article $article : l'article à ajouter ou modifier.
      * @return void
      */
-    public function addOrUpdateArticle(Article $article) : void 
+    public function addOrUpdateArticle(Article $article) : void
     {
         if ($article->getId() == -1) {
             $this->addArticle($article);
@@ -91,5 +91,63 @@ class ArticleManager extends AbstractEntityManager
     {
         $sql = "DELETE FROM article WHERE id = :id";
         $this->db->query($sql, ['id' => $id]);
+    }
+
+    /**
+     * Incrémente le nombre de vues pour un article donné.
+     * @param int $articleId : l'id de l'article.
+     * @return void
+     */
+    public function incrementViewCount(int $articleId): void {
+        try {
+            $sql = "UPDATE article SET view_count = view_count + 1 WHERE id = :id";
+            $this->db->query($sql, ['id' => $articleId]);
+        } catch (\Exception $e) {
+            error_log("Erreur lors de l'incrémentation du nombre de vues pour l'article ID $articleId : " . $e->getMessage());
+            // Gère l'exception selon ta logique (ex: throw new DatabaseException(...))
+        }
+    }
+
+    /**
+     * Récupère le nombre de vues pour un article donné.
+     * @param int $articleId : l'id de l'article.
+     * @return int|null : le nombre de vues.
+     */
+    public function getViewCountByArticleId(int $articleId): ?int {
+        try {
+            $sql = "SELECT view_count FROM article WHERE id = :id";
+            $result = $this->db->query($sql, ['id' => $articleId]);
+            $row = $result->fetch();
+            return $row ? (int)$row['view_count'] : null;
+        } catch (\Exception $e) {
+            error_log("Erreur lors de la récupération du nombre de vues pour l'article ID $articleId : " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Récupère le nombre de commentaires pour un article donné.
+     * @param int $articleId : l'id de l'article.
+     * @return int : le nombre de commentaires.
+     */
+    public function getArticlesCommentCounts(int $articleId): int
+    {
+        $sql = "SELECT COUNT(*) AS comment_count FROM comment WHERE id_article = :id_article";
+        $result = $this->db->query($sql, ['id_article' => $articleId]);
+        $row = $result->fetch();
+        return $row ? (int)$row['comment_count'] : 0;
+    }
+
+    public function getAllArticlesDTO(): array
+    {
+        $sql = "SELECT * FROM article";
+        $result = $this->db->query($sql);
+        $articlesDTO = [];
+
+        while ($articleData = $result->fetch()) {
+            $commentCount = $this->getArticlesCommentCounts($articleData['id']);
+            $articlesDTO[] = new ArticleDTO($articleData, $commentCount);
+        }
+        return $articlesDTO;
     }
 }

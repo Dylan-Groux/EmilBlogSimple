@@ -22,7 +22,7 @@ try {
             $articleController->showApropos();
             break;
         
-        case 'showArticle': 
+        case 'showArticle':
             $articleController = new ArticleController();
             $articleController->showArticle();
             break;
@@ -38,10 +38,15 @@ try {
             break;
 
 
-        // Section admin & connexion. 
-        case 'admin': 
+        // Section admin & connexion.
+        case 'admin':
             $adminController = new AdminController();
             $adminController->showAdmin();
+            break;
+
+        case 'articlesStatistics':
+            $adminController = new AdminController();
+            $adminController->showArticlesStatistics();
             break;
 
         case 'connectionForm':

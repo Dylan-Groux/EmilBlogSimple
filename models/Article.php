@@ -4,19 +4,20 @@
  * Entité Article, un article est défini par les champs
  * id, id_user, title, content, date_creation, date_update
  */
- class Article extends AbstractEntity 
+ class Article extends AbstractEntity
  {
     private int $idUser;
     private string $title = "";
     private string $content = "";
     private ?DateTime $dateCreation = null;
-    private ?DateTime $dateUpdate = null;  
+    private ?DateTime $dateUpdate = null;
+    private int $viewCount = 0;
 
     /**
-     * Setter pour l'id de l'utilisateur. 
+     * Setter pour l'id de l'utilisateur.
      * @param int $idUser
      */
-    public function setIdUser(int $idUser) : void 
+    public function setIdUser(int $idUser) : void
     {
         $this->idUser = $idUser;
     }
@@ -25,7 +26,7 @@
      * Getter pour l'id de l'utilisateur.
      * @return int
      */
-    public function getIdUser() : int 
+    public function getIdUser() : int
     {
         return $this->idUser;
     }
@@ -34,7 +35,7 @@
      * Setter pour le titre.
      * @param string $title
      */
-    public function setTitle(string $title) : void 
+    public function setTitle(string $title) : void
     {
         $this->title = $title;
     }
@@ -43,7 +44,7 @@
      * Getter pour le titre.
      * @return string
      */
-    public function getTitle() : string 
+    public function getTitle() : string
     {
         return $this->title;
     }
@@ -52,7 +53,7 @@
      * Setter pour le contenu.
      * @param string $content
      */
-    public function setContent(string $content) : void 
+    public function setContent(string $content) : void
     {
         $this->content = $content;
     }
@@ -66,7 +67,7 @@
      * Si le contenu est plus grand que $length, on retourne les $length premiers caractères avec "..." à la fin.
      * @return string
      */
-    public function getContent(int $length = -1) : string 
+    public function getContent(int $length = -1) : string
     {
         if ($length > 0) {
             // Ici, on utilise mb_substr et pas substr pour éviter de couper un caractère en deux (caractère multibyte comme les accents).
@@ -123,8 +124,26 @@
      * si la date de mise à jour n'a pas été définie.
      * @return DateTime|null
      */
-    public function getDateUpdate() : ?DateTime 
+    public function getDateUpdate() : ?DateTime
     {
         return $this->dateUpdate;
+    }
+
+    /**
+     * Getter pour le nombre de vues.
+     * @return int
+     */
+    public function getViewCount(): int
+    {
+        return $this->viewCount;
+    }
+
+    /**
+     * Setter pour le nombre de vues.
+     * @param int $viewCount
+     */
+    public function setViewCount(int $viewCount): void
+    {
+        $this->viewCount = $viewCount;
     }
  }

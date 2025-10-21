@@ -176,4 +176,17 @@ class AdminController {
         // On redirige vers la page d'administration.
         Utils::redirect("admin");
     }
+
+    public function showArticlesStatistics() : void
+    {
+        $this->checkIfUserIsConnected();
+
+        $articleManager = new ArticleManager();
+        $articles = $articleManager->getAllArticlesDTO();
+        // On affiche la page des statistiques des articles.
+        $view = new View("Statistiques des articles");
+        $view->render("dashboardstats", [
+            'articles' => $articles
+        ]);
+    }
 }

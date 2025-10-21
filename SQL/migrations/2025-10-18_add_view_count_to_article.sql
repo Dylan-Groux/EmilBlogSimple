@@ -1,0 +1,2 @@
+ALTER TABLE Article
+ADD COLUMN view_count INT DEFAULT 0;
