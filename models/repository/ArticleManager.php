@@ -150,4 +150,24 @@ class ArticleManager extends AbstractEntityManager
         }
         return $articlesDTO;
     }
+    
+    /**
+     * Trie un tableau d'objets ArticleDTO selon un champ et un ordre.
+     * @param array $articles : tableau d'ArticleDTO
+     * @param string $field : nom du champ (ex: 'dateCreation', 'title', 'commentCount')
+     * @param string $order : 'asc' ou 'desc'
+     */
+    public function sortArticlesDTO(array &$articles, string $field, string $order = 'asc') {
+        usort($articles, function($a, $b) use ($field, $order) {
+            $valA = $a->$field;
+            $valB = $b->$field;
+            if ($valA instanceof DateTime) $valA = $valA->format('Y-m-d H:i:s');
+            if ($valB instanceof DateTime) $valB = $valB->format('Y-m-d H:i:s');
+            if ($order === 'asc') {
+                return $valA <=> $valB;
+            } else {
+                return $valB <=> $valA;
+            }
+        });
+    }
 }

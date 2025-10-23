@@ -3,7 +3,7 @@
 /**
  * Classe utilitaire : cette classe ne contient que des méthodes statiques qui peuvent être appelées
  * directement sans avoir besoin d'instancier un objet Utils.
- * Exemple : Utils::redirect('home'); 
+ * Exemple : Utils::redirect('home');
  */
 class Utils {
     /**
@@ -14,7 +14,7 @@ class Utils {
     public static function convertDateToFrenchFormat(DateTime $date) : string
     {
         // Attention, s'il y a un soucis lié à IntlDateFormatter c'est qu'il faut
-        // activer l'extention intl_date_formater (ou intl) au niveau du serveur apache. 
+        // activer l'extention intl_date_formater (ou intl) au niveau du serveur apache.
         // Ca peut se faire depuis php.ini ou parfois directement depuis votre utilitaire (wamp/mamp/xamp)
         $dateFormatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
         $dateFormatter->setPattern('EEEE d MMMM Y');
@@ -51,7 +51,7 @@ class Utils {
 
     /**
      * Cette méthode protège une chaine de caractères contre les attaques XSS.
-     * De plus, elle transforme les retours à la ligne en balises <p> pour un affichage plus agréable. 
+     * De plus, elle transforme les retours à la ligne en balises <p> pour un affichage plus agréable.
      * @param string $string : la chaine à protéger.
      * @return string : la chaine protégée.
      */
@@ -60,7 +60,7 @@ class Utils {
         // Etape 1, on protège le texte avec htmlspecialchars.
         $finalString = htmlspecialchars($string, ENT_QUOTES);
 
-        // Etape 2, le texte va être découpé par rapport aux retours à la ligne, 
+        // Etape 2, le texte va être découpé par rapport aux retours à la ligne,
         $lines = explode("\n", $finalString);
 
         // On reconstruit en mettant chaque ligne dans un paragraphe (et en sautant les lignes vides).
@@ -86,5 +86,4 @@ class Utils {
     {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
-
 }

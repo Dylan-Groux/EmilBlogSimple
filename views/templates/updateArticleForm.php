@@ -1,6 +1,6 @@
-<?php 
-    /** 
-     * Template du formulaire d'update/creation d'un article. 
+<?php
+    /**
+     * Template du formulaire d'update/creation d'un article.
      */
 ?>
 
@@ -16,10 +16,3 @@
         <button class="submit"><?= $article->getId() == -1 ? "Ajouter" : "Modifier" ?></button>
     </div>
 </form>
-
-<script>
-
-    
-    
-
-</script>

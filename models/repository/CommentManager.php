@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Cette classe sert à gérer les commentaires. 
+ * Cette classe sert à gérer les commentaires.
  */
 class CommentManager extends AbstractEntityManager
 {
@@ -65,5 +65,5 @@ class CommentManager extends AbstractEntityManager
         $result = $this->db->query($sql, ['id' => $comment->getId()]);
         return $result->rowCount() > 0;
     }
-
 }
+

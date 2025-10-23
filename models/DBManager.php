@@ -5,7 +5,7 @@
  * Cette classe est un singleton. Cela signifie qu'il n'est pas possible de créer plusieurs instances de cette classe.
  * Pour récupérer une instance de cette classe, il faut utiliser la méthode getInstance().
  */
-class DBManager 
+class DBManager
 {
     // Création d'une classe singleton qui permet de se connecter à la base de données.
     // On crée une instance de la classe DBConnect qui permet de se connecter à la base de données.
@@ -19,7 +19,7 @@ class DBManager
      * Ce constructeur est privé. Pour récupérer une instance de la classe, il faut utiliser la méthode getInstance().
      * @see DBManager::getInstance()
      */
-    private function __construct() 
+    private function __construct()
     {
         // On se connecte à la base de données.
         $this->db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
@@ -65,5 +65,4 @@ class DBManager
         }
         return $query;
     }
-    
 }

@@ -1,6 +1,6 @@
 <?php
 
-class CommentController 
+class CommentController
 {
     /**
      * Ajoute un commentaire.
@@ -43,5 +43,31 @@ class CommentController
 
         // On redirige vers la page de l'article.
         Utils::redirect("showArticle", ['id' => $idArticle]);
+    }
+
+    /**
+     * Supprime un commentaire.
+     * @return void
+     */
+    public function deleteComment() : void
+    {
+        $idComment = Utils::request("idComment");
+        if (empty($idComment)) {
+            Utils::redirect("home");
+        }
+
+        $commentManager = new CommentManager();
+        $comment = $commentManager->getCommentById($idComment);
+        if (!$comment) {
+            Utils::redirect("home");
+        }
+
+        $result = $commentManager->deleteComment($comment);
+        if (!$result) {
+            Utils::redirect("home");
+        }
+
+        // Redirige vers l'article d'origine
+        Utils::redirect("showArticle", ["id" => $comment->getIdArticle()]);
     }
 }

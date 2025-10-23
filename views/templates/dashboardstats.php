@@ -5,13 +5,32 @@
 ?>
 
 <h2>Statistiques des articles</h2>
+<a class="submit" href="index.php?action=dashboardArticles">Dashboard des articles</a>
+<a class="submit" href="index.php?action=admin">Page d'administration</a>
 
-<table border="1" cellpadding="8" style="border-collapse:collapse; width:100%;">
+<table class="statsTable" border="1">
 	<thead>
 		<tr>
-			<th>Titre</th>
-			<th>Nombre de commentaires</th>
-			<th>Nombre de vues</th>
+			<th>
+				Titre
+				<a href="index.php?action=articlesStatistics&sort=title&order=asc" title="Tri croissant">▲</a>
+				<a href="index.php?action=articlesStatistics&sort=title&order=desc" title="Tri décroissant">▼</a>
+			</th>
+			<th>
+				Nombre de commentaires
+				<a href="index.php?action=articlesStatistics&sort=commentCount&order=asc" title="Tri croissant">▲</a>
+				<a href="index.php?action=articlesStatistics&sort=commentCount&order=desc" title="Tri décroissant">▼</a>
+			</th>
+			<th>
+				Nombre de vues
+				<a href="index.php?action=articlesStatistics&sort=viewCount&order=asc" title="Tri croissant">▲</a>
+				<a href="index.php?action=articlesStatistics&sort=viewCount&order=desc" title="Tri décroissant">▼</a>
+			</th>
+			<th>
+				Date de création
+				<a href="index.php?action=articlesStatistics&sort=dateCreation&order=asc" title="Tri croissant">▲</a>
+				<a href="index.php?action=articlesStatistics&sort=dateCreation&order=desc" title="Tri décroissant">▼</a>
+			</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -20,6 +39,7 @@
 				<td><?= htmlspecialchars($article->title) ?></td>
 				<td><?= $article->commentCount ?></td>
 				<td><?= $article->viewCount ?></td>
+				   <td><?= $article->dateCreation instanceof DateTime ? $article->dateCreation->format('Y-m-d H:i:s') : $article->dateCreation ?></td>
 			</tr>
 		<?php } ?>
 	</tbody>

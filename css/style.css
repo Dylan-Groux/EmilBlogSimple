@@ -350,3 +350,30 @@ footer {
     color: white;
     background-color: var(--headerColor);
 }
+
+form button.deleteCommentBtn {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: large;
+    border: none !important;
+    cursor: pointer;
+    color: red;
+}
+
+/* Annule le style général pour le formulaire de suppression de commentaire */
+.deleteCommentForm {
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: inherit !important;
+    background: none !important;
+}
+
+.statsTable th, .statsTable td {
+    padding: 8px;
+}
+
+.statsTable tr:nth-child(even) {
+    background-color: var(--commentPaleColor);
+    color: white;
+}

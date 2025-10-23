@@ -20,22 +20,30 @@
 
 <div class="comments">
     <h2 class="commentsTitle">Vos Commentaires</h2>
-    <?php 
+    <?php
         if (empty($comments)) {
             echo '<p class="info">Aucun commentaire pour cet article.</p>';
         } else {
             echo '<ul>';
             foreach ($comments as $comment) {
-                echo '<li>';
-                echo '  <div class="smiley">☻</div>';
-                echo '  <div class="detailComment">';
-                echo '      <h3 class="info">Le ' . Utils::convertDateToFrenchFormat($comment->getDateCreation()) . ", " . Utils::format($comment->getPseudo()) . ' a écrit :</h3>';
-                echo '      <p class="content">' . Utils::format($comment->getContent()) . '</p>';
-                echo '  </div>';
-                echo '</li>';
-            }               
+                    echo '<li>';
+                    echo '  <div class="smiley">☻</div>';
+                    echo '  <div class="detailComment">';
+                    echo '      <h3 class="info">Le ' . Utils::convertDateToFrenchFormat($comment->getDateCreation()) . ", " . Utils::format($comment->getPseudo()) . ' a écrit :</h3>';
+                    echo '      <p class="content">' . Utils::format($comment->getContent()) . '</p>';
+                    // Affiche le bouton de suppression si un utilisateur est connecté
+                    if (isset($_SESSION['user'])) {
+                        echo '<form method="post" action="index.php" class="deleteCommentForm" style="display:inline">';
+                        echo '<input type="hidden" name="action" value="deleteComment">';
+                        echo '<input type="hidden" name="idComment" value="' . $comment->getId() . '">';
+                        echo '<button type="submit" class="deleteCommentBtn" title="Supprimer ce commentaire">✖</button>';
+                        echo '</form>';
+                    }
+                    echo '  </div>';
+                    echo '</li>';
+            }
             echo '</ul>';
-        } 
+        }
     ?>
 
     <form action="index.php" method="post" class="foldedCorner">

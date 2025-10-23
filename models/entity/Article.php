@@ -84,9 +84,9 @@
      * Setter pour la date de création. Si la date est une string, on la convertit en DateTime.
      * @param string|DateTime $dateCreation
      * @param string $format : le format pour la convertion de la date si elle est une string.
-     * Par défaut, c'est le format de date mysql qui est utilisé. 
+     * Par défaut, c'est le format de date mysql qui est utilisé.
      */
-    public function setDateCreation(string|DateTime $dateCreation, string $format = 'Y-m-d H:i:s') : void 
+    public function setDateCreation(string|DateTime $dateCreation, string $format = 'Y-m-d H:i:s') : void
     {
         if (is_string($dateCreation)) {
             $dateCreation = DateTime::createFromFormat($format, $dateCreation);
@@ -99,7 +99,7 @@
      * Grâce au setter, on a la garantie de récupérer un objet DateTime.
      * @return DateTime
      */
-    public function getDateCreation() : DateTime 
+    public function getDateCreation() : DateTime
     {
         return $this->dateCreation;
     }
@@ -110,7 +110,7 @@
      * @param string $format : le format pour la convertion de la date si elle est une string.
      * Par défaut, c'est le format de date mysql qui est utilisé.
      */
-    public function setDateUpdate(string|DateTime $dateUpdate, string $format = 'Y-m-d H:i:s') : void 
+    public function setDateUpdate(string|DateTime|null $dateUpdate, string $format = 'Y-m-d H:i:s') : void
     {
         if (is_string($dateUpdate)) {
             $dateUpdate = DateTime::createFromFormat($format, $dateUpdate);
